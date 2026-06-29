@@ -1,0 +1,46 @@
+# Full Error-Gated PNN Maturation method (the contribution).
+# Ablations (ablations/registry.py) are deep-merged onto this 'method' block.
+method:
+  name: pnn
+  alpha: 0.1               # maturation rate
+  beta: 5.0                # gradient-gating strength (grad_scale)
+  gating: grad_scale       # grad_scale | lr_scale | none
+  granularity: paramwise   # paramwise | layerwise
+  maturation: true
+  closure_mode: error_gated   # error_gated | immediate | fixed | delayed | none
+  fixed_closure_epoch: 3
+  P_init: zeros            # zeros | random | uniform
+  P_init_value: 0.5
+  consolidated_threshold: 0.5
+  importance:
+    method: hybrid         # magnitude | grad | grad_var | fisher | hybrid
+    ema_decay: 0.9
+    weights: [0.34, 0.33, 0.33]
+    uniform: false         # true => error-gated-only ablation
+  closure:
+    error_threshold: 0.15
+    improvement_threshold: 0.02
+    stability_threshold: 0.01
+    gamma: 5.0
+    consecutive_epochs: 3
+    slope_window: 3
+    ema_decay: 0.6
+  reopening:
+    enabled: true
+    threshold: 0.5
+    epochs: 2
+    factor: 0.3
+  replay:
+    enabled: false
+    buffer_size: 500
+    batch_size: 32
+  anchor:
+    enabled: false
+    lambda: 10.0
+    normalize: true
+  sleep:
+    enabled: false
+    epochs: 2
+    lr: 0.001
+    strength: 0.5
+    buffer_per_task: 200

@@ -1,0 +1,7 @@
+label_set,gate,n,sep_mean,sep_ci_low,sep_ci_high,sep_min,inversion_rate,buffer_purity,d_acc_vs_er
+aggre,gate_loss,5,0.513,0.476,0.549,0.462,0.0,0.978,0.001
+aggre,gate_conf,5,0.109,0.085,0.133,0.084,0.0,0.939,-0.007
+aggre,gate_coteach,5,0.503,0.443,0.563,0.451,0.0,0.985,-0.035
+worse,gate_loss,5,0.124,0.101,0.148,0.107,0.0,0.806,-0.0
+worse,gate_conf,5,0.005,-0.033,0.043,-0.045,0.08,0.633,-0.002
+worse,gate_coteach,5,0.385,0.301,0.468,0.303,0.0,0.905,-0.007

@@ -1,0 +1,30 @@
+{
+  "data": {
+    "name": "split_cifar10",
+    "task_il": true,
+    "n_classes": 10,
+    "classes_per_task": 2,
+    "normalize": true,
+    "val_fraction": 0.05,
+    "max_train_per_task": 2500,
+    "max_test_per_task": 1000,
+    "allow_download": true,
+    "seed": 4,
+    "label_noise": {
+      "rate": 0.4,
+      "schedule": "all",
+      "noise_type": "asymmetric"
+    }
+  },
+  "method": {
+    "name": "gated_replay",
+    "buffer_size": 500,
+    "batch_size": 32,
+    "oracle": true,
+    "seed": 4
+  },
+  "train": {
+    "epochs": 8,
+    "batch_size": 128
+  }
+}

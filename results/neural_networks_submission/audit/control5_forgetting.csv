@@ -1,0 +1,2 @@
+benchmark,n,corr_purity_acc,corr_forget_acc,std_beta_purity,std_beta_forget
+class-IL (pooled),165,0.376,0.514,0.0079,0.0297

@@ -1,0 +1,132 @@
+diff --git a/backbone/__init__.py b/backbone/__init__.py
+index 81f0111..7f04cc4 100644
+--- a/backbone/__init__.py
++++ b/backbone/__init__.py
+@@ -15,6 +15,14 @@ ReturnTypes = Literal[
+     "out", "features", "both", "all"
+ ]  # the return type of the forward method of the backbone network
+ 
++_SKIP_OPTIONAL_BACKBONES = set()
++if os.getenv("MAMMOTH_IMPORT_OPTIONAL_BACKBONES", "0") != "1":
++    # Stage 0 uses ResNet-18. Avoid importing the local ViT/timm path unless a
++    # later experiment explicitly asks for it.
++    _SKIP_OPTIONAL_BACKBONES.update({
++        "vit.py",
++    })
++
+ 
+ def xavier(m: nn.Module) -> None:
+     """
+@@ -231,5 +239,5 @@ def get_backbone_names(names_only=False):
+ 
+ # import all files in the backbone folder to register the networks
+ for file in os.listdir(os.path.dirname(__file__)):
+-    if file.endswith('.py') and file != '__init__.py':
++    if file.endswith('.py') and file != '__init__.py' and file not in _SKIP_OPTIONAL_BACKBONES:
+         importlib.import_module(f'backbone.{file[:-3]}')
+diff --git a/datasets/__init__.py b/datasets/__init__.py
+index 5470da4..fb2034a 100644
+--- a/datasets/__init__.py
++++ b/datasets/__init__.py
+@@ -21,6 +21,19 @@ from datasets.utils.continual_dataset import ContinualDataset
+ 
+ REGISTERED_DATASETS = dict()  # dictionary containing the registered datasets. Template: {name: {'class': class, 'parsable_args': parsable_args}}
+ 
++_SKIP_OPTIONAL_DATASETS = set()
++if os.getenv("MAMMOTH_IMPORT_OPTIONAL_DATASETS", "0") != "1":
++    # Several optional datasets construct OpenCLIP transforms at import time.
++    # They are unrelated to Seq-CIFAR Stage 0 and make every run hit HuggingFace
++    # before parsing args.
++    _SKIP_OPTIONAL_DATASETS.update({
++        "seq_8vision.py",
++        "seq_dtd.py",
++        "seq_gtrsrb.py",
++        "seq_sun397.py",
++        "seq_svhn.py",
++    })
++
+ 
+ def register_dataset(name: str) -> Callable:
+     """
+@@ -43,7 +56,7 @@ def get_all_datasets_legacy() -> List[str]:
+     """
+ 
+     return [model.split('.')[0] for model in os.listdir('datasets')
+-            if not model.find('__') > -1 and 'py' in model]
++            if not model.find('__') > -1 and 'py' in model and model not in _SKIP_OPTIONAL_DATASETS]
+ 
+ 
+ def get_dataset_names(names_only=False) -> Union[List[str], dict]:
+@@ -170,7 +183,6 @@ def get_dataset(args: Namespace) -> ContinualDataset:
+     return dataset_class(args, **parsed_args)
+ 
+ 
+-# import all files in the `datasets` folder to register the datasets
+ for file in os.listdir(os.path.dirname(__file__)):
+-    if file.endswith('.py') and file != '__init__.py':
++    if file.endswith('.py') and file != '__init__.py' and file not in _SKIP_OPTIONAL_DATASETS:
+         importlib.import_module(f'datasets.{file[:-3]}')
+diff --git a/models/__init__.py b/models/__init__.py
+index 42c8456..82eb628 100644
+--- a/models/__init__.py
++++ b/models/__init__.py
+@@ -21,6 +21,24 @@ from utils.conf import warn_once
+ 
+ REGISTERED_MODELS = dict()  # dictionary containing the registered models. Template: {name: {'class': class, 'parsable_args': parsable_args}}
+ 
++_SKIP_OPTIONAL_MODELS = set()
++if os.getenv("MAMMOTH_IMPORT_OPTIONAL_MODELS", "0") != "1":
++    # Keep Stage 0 CIFAR runs from importing optional CLIP/ViT-heavy methods at
++    # startup. The requested DER++ and PNN-DER++ methods remain available.
++    _SKIP_OPTIONAL_MODELS.update({
++        "attriclip.py",
++        "cgil.py",
++        "clip.py",
++        "first_stage_starprompt.py",
++        "idefics.py",
++        "llava.py",
++        "moe_adapters.py",
++        "second_stage_starprompt.py",
++        "starprompt.py",
++        "tak.py",
++        "zscl.py",
++    })
++
+ def register_model(name: str) -> Callable:
+     """
+     Decorator to register a ContinualModel. The decorator should be used on a class that inherits from `ContinualModel`.
+@@ -40,7 +58,7 @@ def get_all_models_legacy() -> List[dict]:
+     Returns the list of all the available models in the models folder that follow the model naming convention (see :ref:`models`).
+     """
+     return {model.split('.')[0].replace('_', '-'): model.split('.')[0] for model in os.listdir('models')
+-            if not model.find('__') > -1 and not os.path.isdir('models/' + model)}
++            if not model.find('__') > -1 and not os.path.isdir('models/' + model) and model not in _SKIP_OPTIONAL_MODELS}
+ 
+ 
+ def get_model(args: Namespace, backbone: nn.Module, loss, transform, dataset) -> ContinualModel:
+diff --git a/utils/training.py b/utils/training.py
+index b34eaba..7102d59 100644
+--- a/utils/training.py
++++ b/utils/training.py
+@@ -197,6 +197,21 @@ def train(model: ContinualModel, dataset: ContinualDataset,
+         for cur_task in range(start_task, end_task):
+             model.net.train()
+             train_loader, _ = dataset.get_data_loaders()
++            try:
++                first_batch = next(iter(train_loader))
++                first_inputs = first_batch[0]
++                logging.info(
++                    "[CL-DIAG] task=%s len_train_loader=%s first_batch_shape=%s "
++                    "batch_size_arg=%s n_epochs=%s task_progress_total=%s",
++                    cur_task + 1,
++                    len(train_loader),
++                    tuple(first_inputs.shape),
++                    args.batch_size,
++                    args.n_epochs,
++                    args.n_epochs * len(train_loader) if args.fitting_mode == 'epochs' else args.n_iters,
++                )
++            except Exception as e:
++                logging.warning("[CL-DIAG] failed to inspect train loader: %s", e)
+ 
+             if not issubclass(dataset.__class__, GCLDataset):
+                 assert issubclass(train_loader.dataset.__class__, MammothDatasetWrapper), "Dataset must be an instance of MammothDatasetWrapper (did you forget to call the `store_masked_loaders`?)"

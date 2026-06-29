@@ -1,0 +1,26 @@
+{
+  "data": {
+    "name": "cifar10n",
+    "task_il": true,
+    "variant": "aggre",
+    "n_classes": 10,
+    "classes_per_task": 2,
+    "normalize": true,
+    "val_fraction": 0.05,
+    "max_train_per_task": 2500,
+    "max_test_per_task": 1000,
+    "allow_download": true,
+    "seed": 4
+  },
+  "method": {
+    "name": "gated_replay",
+    "buffer_size": 500,
+    "batch_size": 32,
+    "oracle": true,
+    "seed": 4
+  },
+  "train": {
+    "epochs": 8,
+    "batch_size": 128
+  }
+}

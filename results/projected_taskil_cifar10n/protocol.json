@@ -1,0 +1,24 @@
+{
+  "artifact_name": "projected task-IL CIFAR-10N",
+  "benchmark_key": "cifar10n_taskil",
+  "label_variants": ["aggre", "worse"],
+  "class_pairs": [[0, 1], [2, 3], [4, 5], [6, 7], [8, 9]],
+  "methods": ["er", "derpp", "gate_loss", "gate_conf", "oracle"],
+  "seeds": [0, 1, 2, 3, 4],
+  "backbone": "resnet18",
+  "multihead": true,
+  "classes_per_task": 2,
+  "max_train_per_task": 2500,
+  "max_test_per_task": 1000,
+  "epochs_per_task": 8,
+  "train_batch_size": 128,
+  "replay_batch_size": 32,
+  "buffer_size": 500,
+  "optimizer": {
+    "name": "adam",
+    "learning_rate": 0.001,
+    "weight_decay": 0.0
+  },
+  "projection": "incorrect human annotations map to 1 - clean_local",
+  "raw_run_count": 50
+}

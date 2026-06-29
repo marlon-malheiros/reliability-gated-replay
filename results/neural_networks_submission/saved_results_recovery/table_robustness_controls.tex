@@ -1,0 +1,23 @@
+\begin{table}[H]
+\centering
+\caption{Robustness controls for the gate-separation diagnostic recovered from saved results. Accuracy/purity entries report paired mean differences.}
+\label{tab:robustness_controls}
+\scriptsize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabularx}{\linewidth}{@{}p{0.24\linewidth}p{0.34\linewidth}Y@{}}
+\toprule
+Control & Quantitative result & Interpretation \\
+\midrule
+Run-level association & Pearson $r=+0.74$ and Spearman $\rho=+0.81$ across $n=530$ pairs; ROC-AUC $0.85$ with optimal threshold $+0.016$ & Gate separation predicts the sign and magnitude of replay payoff. \\
+Condition-mean association & $r=+0.80$ across $n=154$ condition means; cluster-bootstrap $95\%$ CI $[+0.57,+0.84]$ & The relation is not driven only by within-condition replication. \\
+Permutation control & Shuffled association $0.00\pm0.04$, $p<10^{-3}$ & The association collapses when gate separation is randomized. \\
+Regime analysis & MNIST $r=+0.81$; Split-CIFAR-10 $r=+0.68$; class-incremental CIFAR $r=-0.26$ & The diagnostic is informative when replay purity constrains performance. \\
+Matched-admission random gates & Small-loss minus matched random (accuracy/purity): Split $20\%$ +0.045/+0.062, Split $60\%$ -0.024/-0.022, Seq $20\%$ +0.007/+0.172 & Reliability-based selection, rather than admission quantity alone, explains purification. \\
+Oracle-thinned admission & Oracle-thinned minus matched random (accuracy/purity): Split $20\%$ +0.082/+0.210, Split $60\%$ +0.193/+0.594, Seq $20\%$ +0.007/+0.210 & Clean admission improves purity strongly; at Split $60\%$, clean supply is below the target admission rate and the oracle saturates. \\
+Threshold grid & $\gamma\in\{1,3,6\}$ and $\tau_{\rm err}\in\{0.5,1.0,1.5\}$; mean separation ranges [+0.145,+0.460] at $20\%$ and [-0.135,-0.027] at $60\%$ & All nine saved cells are aligned at $20\%$ and inverted at $60\%$. \\
+Buffer-size grid & Accuracy/purity differences for Small-loss minus ER at $20\%$: $M=200$: +0.030/+0.083, $M=500$: +0.034/+0.027, $M=1000$: +0.066/+0.081; at $60\%$: $M=200$: -0.006/-0.032, $M=500$: -0.028/-0.031, $M=1000$: +0.003/-0.002 & Alignment and purification persist at moderate noise; the high-noise accuracy penalty attenuates at $M=1000$. \\
+Oracle bound & Purity gain $+0.27$ to $+0.39$; accuracy gain $+0.15$ on Split-CIFAR-10 and $+0.17$ on Seq-CIFAR-10 & Clean selective replay establishes the attainable purity advantage under the fixed replay mechanism. \\
+\bottomrule
+\end{tabularx}
+\end{table}

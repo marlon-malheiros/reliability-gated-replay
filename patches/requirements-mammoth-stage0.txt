@@ -1,0 +1,27 @@
+# Extra dependencies for the Mammoth Stage 0 real-CIFAR test.
+#
+# Keep this separate from the base project requirements because Mammoth imports
+# many optional datasets/models during discovery.
+
+# Mammoth core packages used by Seq-CIFAR + DER++.
+kornia>=0.7.0
+open-clip-torch>=2.32.0
+setproctitle==1.3.2
+timm==0.9.8
+ftfy
+regex
+onedrivedownloader==1.1.3
+googledrivedownloader==0.4
+decorator
+accelerate
+
+# Packages that silence Mammoth optional-model discovery warnings.
+clip @ git+https://github.com/openai/CLIP.git
+transformers
+kmeans-pytorch
+xitorch
+wandb
+
+# GPU/system-stat logging used by Mammoth.
+gpustat
+nvidia-ml-py

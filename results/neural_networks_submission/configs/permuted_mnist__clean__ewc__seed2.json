@@ -1,0 +1,28 @@
+{
+  "data": {
+    "name": "permuted_mnist",
+    "source": "mnist",
+    "multihead": false,
+    "n_tasks": 5,
+    "max_train_per_task": 3000,
+    "val_fraction": 0.1,
+    "allow_download": true,
+    "fallback_synthetic": true,
+    "seed": 2,
+    "label_noise": {
+      "rate": 0.0,
+      "schedule": "clean",
+      "noise_type": "symmetric"
+    }
+  },
+  "method": {
+    "name": "ewc",
+    "lambda": 100.0,
+    "fisher_samples": 512,
+    "seed": 2
+  },
+  "train": {
+    "epochs": 8,
+    "batch_size": 128
+  }
+}

@@ -1,0 +1,13 @@
+comparison_id,benchmark,condition,left_method,right_method,metric,n_pairs,mean_difference,ci_low,ci_high,cohens_dz,wilcoxon_p,benchmark_name,condition_name,comparison_name
+comparison_01,split_cifar10,sym20,gate_loss,er,average_accuracy,5,0.047759999999999934,0.02831999999999992,0.06879999999999994,1.8843601797940166,0.0625,Split-CIFAR-10,Sym. 20\%,Small-loss $-$ ER (accuracy)
+comparison_02,split_cifar10,sym60,gate_loss,er,average_accuracy,5,-0.023399999999999987,-0.040559999999999964,-0.006240000000000023,-1.040277444315995,0.125,Split-CIFAR-10,Sym. 60\%,Small-loss $-$ ER (accuracy)
+comparison_03,split_cifar10,sym20,oracle,gate_loss,average_accuracy,5,0.03860000000000006,0.02232000000000005,0.05518000000000012,1.833661971077405,0.0625,Split-CIFAR-10,Sym. 20\%,Oracle $-$ Small-loss (accuracy)
+comparison_04,split_cifar10,sym60,oracle,er,average_accuracy,5,0.20804000000000009,0.1819000000000001,0.2341800000000001,6.315450841978611,0.0625,Split-CIFAR-10,Sym. 60\%,Oracle $-$ ER (accuracy)
+comparison_05,split_cifar10,asym40,oracle,gate_loss,average_accuracy,5,0.14497999999999991,0.11503999999999988,0.1637999999999999,4.4508277234019555,0.0625,Split-CIFAR-10,Asym. 40\%,Oracle $-$ Small-loss (accuracy)
+comparison_06,seq_cifar10,sym20,oracle,derpp,average_accuracy,5,-0.0038000000000000143,-0.038280000000000015,0.022759999999999968,-0.09521865886141392,1.0,Seq-CIFAR-10,Sym. 20\%,Oracle $-$ DER++ (accuracy)
+comparison_07,seq_cifar10,sym60,oracle,gate_loss,average_accuracy,5,0.03799999999999999,0.008359999999999989,0.061119999999999994,1.1376735608991682,0.125,Seq-CIFAR-10,Sym. 60\%,Oracle $-$ Small-loss (accuracy)
+comparison_08,seq_cifar10,asym40,oracle,derpp,average_accuracy,5,0.008199999999999995,-0.020880000000000003,0.03684,0.21844232025196617,0.8125,Seq-CIFAR-10,Asym. 40\%,Oracle $-$ DER++ (accuracy)
+comparison_09,seq_cifar10,sym20,gate_loss,er,buffer_purity,5,0.15039999999999995,0.1456,0.1547999999999999,26.260979120936256,0.0625,Seq-CIFAR-10,Sym. 20\%,Small-loss $-$ ER (buffer purity)
+comparison_10,seq_cifar10,sym20,gate_loss,er,average_accuracy,5,-0.005439999999999973,-0.012839999999999945,0.004480000000000023,-0.4986253240308065,0.4375,Seq-CIFAR-10,Sym. 20\%,Small-loss $-$ ER (accuracy)
+comparison_11,seq_cifar10,sym60,gate_loss,er,buffer_purity,5,0.12239999999999998,0.076,0.16879999999999998,2.0645771144859837,0.0625,Seq-CIFAR-10,Sym. 60\%,Small-loss $-$ ER (buffer purity)
+comparison_12,seq_cifar10,sym60,gate_loss,er,average_accuracy,5,0.019000000000000045,0.006120000000000026,0.032400000000000026,1.1532744692077261,0.0625,Seq-CIFAR-10,Sym. 60\%,Small-loss $-$ ER (accuracy)

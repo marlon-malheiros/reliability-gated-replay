@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the version-specific Zenodo release."
+type: software
+title: "Reliability-Gated Replay: Code and Results for a Power--Safety Frontier in Continual Learning"
+version: "1.0.0-submission"
+authors:
+  - family-names: "Malheiros"
+    given-names: "Marlon"
+    affiliation: "Signal Processing Laboratory, Universidade Federal do Pará (UFPA)"
+  - family-names: "Pereira"
+    given-names: "Antonio"
+    orcid: "https://orcid.org/0000-0002-0808-1058"
+    affiliation: "Signal Processing Laboratory, Universidade Federal do Pará (UFPA)"
+abstract: >-
+  Code, configurations, aggregated results, and figure-generation scripts for
+  reliability-gated replay experiments in continual learning under unreliable
+  supervision.
+keywords:
+  - continual learning
+  - experience replay
+  - label noise
+  - reliability-gated replay
+  - catastrophic forgetting
+  - memory purity
+  - CIFAR-10N
+  - reproducibility
+license: MIT

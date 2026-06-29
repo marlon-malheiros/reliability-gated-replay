@@ -1,0 +1,17 @@
+baseline,status,reason_if_missing,closest_available_substitute,source_file,command
+ER,implemented,,,baselines/replay.py,python scripts/run_nn_submission.py --methods er
+DER++,implemented,,,baselines/derpp.py,python scripts/run_nn_submission.py --methods derpp
+EWC,implemented,,,baselines/ewc.py,python scripts/run_nn_submission.py --methods ewc
+SI,implemented,,,baselines/si.py,python scripts/run_nn_submission.py --methods si
+ER-ACE,implemented,,,baselines/er_ace.py,python scripts/run_nn_submission.py --methods er_ace
+Random replay admission,implemented,,identical to ER (reservoir admits all),baselines/replay.py,python scripts/run_nn_submission.py --methods er
+Loss/error-based replay admission,implemented,,,baselines/gated_replay.py (signal=error),python scripts/run_nn_submission.py --methods gate_loss
+Confidence-based replay admission,implemented,,,baselines/gated_replay.py (signal=confidence),python scripts/run_nn_submission.py --methods gate_conf
+Prediction-stability replay admission,implemented,,,baselines/gated_replay.py (signal=pred_stability),python scripts/run_nn_submission.py --methods gate_predstab
+Representation-stability replay admission,implemented,,,baselines/gated_replay.py (signal=repr_stability),python scripts/run_nn_submission.py --methods gate_reprstab
+Co-teaching / agreement-based selection,implemented,,,baselines/gated_replay.py (coteach + agreement),python scripts/run_nn_submission.py --methods gate_coteach
+Teacher / agreement gate,implemented,,,baselines/gated_replay.py (agreement + EMA teacher),python scripts/run_nn_submission.py --methods gate_teacher
+SPR (Self-Purified Replay),approximated,Full SPR uses a self-supervised expert + per-sample loss-history filter; the self-supervised expert net is not reimplemented,Loss-trajectory (DivideMix-style small-loss-over-time) admission gate captures SPR's core small-loss purification criterion,baselines/gated_replay.py (signal=loss_traj),python scripts/run_nn_submission.py --methods gate_spr
+PuriDivER,approximated,Full PuriDivER does loss+diversity EM-clustering buffer management; the diversity-EM step is not reimplemented,Loss-trajectory gate (purity) + reported buffer class-entropy/balance (diversity); oracle gives the purity upper bound,baselines/gated_replay.py (signal=loss_traj) + buffer diversity metrics,python scripts/run_nn_submission.py --methods gate_spr
+AER/AGR (adversarial/asymmetric replay purifiers),approximated,No clean public reference implementation integrable without a separate framework,Supervised error/loss admission gate (the strongest in-repo small-loss purifier),baselines/gated_replay.py (signal=error),python scripts/run_nn_submission.py --methods gate_loss
+Oracle clean-sample selector,implemented,,upper bound (uses ground-truth noise mask; diagnostic only),baselines/gated_replay.py (oracle=true),python scripts/run_nn_submission.py --methods oracle

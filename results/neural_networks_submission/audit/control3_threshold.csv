@@ -1,0 +1,2 @@
+n,positive_rate,roc_auc,bal_acc_thr0,youden_threshold,bal_acc_opt
+530,0.581,0.853,0.742,0.0162,0.787

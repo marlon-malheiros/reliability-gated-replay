@@ -1,0 +1,5 @@
+grid,expected,observed,missing,complete
+seq_cifar10,75,75,0,True
+split_cifar10,75,75,0,True
+cifar10n,60,60,0,True
+seq_cifar100,30,30,0,True
