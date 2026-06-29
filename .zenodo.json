@@ -12,7 +12,7 @@
   ],
   "title": "Reliability-Gated Replay: Code and Results for a Power--Safety Frontier in Continual Learning",
   "description": "This archive contains the code, configuration files, aggregated results, and figure-generation scripts associated with the manuscript 'Reliability-Gated Replay Reveals a Power--Safety Frontier for Unreliable Data in Continual Learning'. The repository implements reliability-gated replay experiments for continual learning under unreliable supervision, including MNIST-family controls, Split-CIFAR-10, Seq-CIFAR-10, CIFAR-10N, Seq-CIFAR-100, and the external AER baseline analysis. Public benchmark datasets are not redistributed and should be obtained from their original sources. Clean reference labels are used only for diagnostics and oracle controls, not by realizable gates.",
-  "version": "v1.0.0-submission",
+  "version": "v1.0.1-submission",
   "access_right": "open",
   "keywords": [
     "continual learning",

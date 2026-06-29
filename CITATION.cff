@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use this software, please cite the version-specific Zenodo release."
 type: software
 title: "Reliability-Gated Replay: Code and Results for a Power--Safety Frontier in Continual Learning"
-version: "1.0.0-submission"
+version: "1.0.1-submission"
 authors:
   - family-names: "Malheiros"
     given-names: "Marlon"
