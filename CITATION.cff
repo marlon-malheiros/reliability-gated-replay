@@ -25,3 +25,7 @@ keywords:
   - CIFAR-10N
   - reproducibility
 license: MIT
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.21017758
+repository-code: "https://github.com/marlon-malheiros/reliability-gated-replay"

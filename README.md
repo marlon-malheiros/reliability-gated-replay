@@ -1,5 +1,7 @@
 # Reliability-Gated Replay
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21017758.svg)](https://doi.org/10.5281/zenodo.21017758)
+
 Code, configurations, aggregated results, and figure-generation scripts for:
 
 **Reliability-Gated Replay Reveals a Power--Safety Frontier for Unreliable Data
@@ -7,6 +9,13 @@ in Continual Learning**
 
 This repository is the reproducibility package prepared for the manuscript
 submitted to *Neural Networks*.
+
+## Archive
+
+Version-specific Zenodo archive for the submission:
+
+- DOI: `10.5281/zenodo.21017758`
+- URL: `https://doi.org/10.5281/zenodo.21017758`
 
 ## Contents
 
