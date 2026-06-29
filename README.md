@@ -127,7 +127,8 @@ See `patches/README.md` for the exact upstream commit and archived modifications
 
 ## Citation
 
-A version-specific Zenodo DOI will be added after the GitHub release is archived.
+Please cite the version-specific Zenodo archive for this submission:
+`10.5281/zenodo.21017758`
 
 ## Authors and funding
 
